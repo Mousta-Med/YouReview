@@ -1,7 +1,6 @@
 package com.example.demo.model.response;
 
 import com.example.demo.model.enums.Role;
-import com.example.demo.model.entity.Reaction;
 import lombok.Data;
 
 import java.util.List;
@@ -20,5 +19,4 @@ public class PersonResDto {
 
     private Role role;
 
-    private List<Reaction> reactions;
 }

@@ -31,9 +31,7 @@ public final class Person extends Auditable{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "person",fetch = FetchType.LAZY)
-    private List<Reaction> reactions;
-
+    
     @OneToMany(mappedBy = "person",fetch = FetchType.LAZY)
     private List<Review> reviews;
 

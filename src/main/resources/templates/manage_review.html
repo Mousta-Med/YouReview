@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-gray-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<div class="flex items-center justify-center h-screen">
+    <form class="space-y-8 divide-y divide-gray-200 height-full width-full" th:action="@{|/review/${methode}|}"  th:object="${review}" method="post">
+        <div class="space-y-8 divide-y divide-gray-200">
+            <input type="hidden" th:value="${id}" name="id">
+            <div class="pt-8">
+                <div>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900" th:text="${title}"></h3>
+                </div>
+                <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+                    <div class="sm:col-span-6">
+                        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                        <div class="mt-1">
+                            <input type="text" name="title" id="title" autocomplete="title" th:field="*{title}"
+                                   class="height-24 block w-full border rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-6">
+                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                        <div class="mt-1">
+                            <input type="text" name="message" id="message" autocomplete="message" th:field="*{message}"
+                                   class="block w-full border rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-5">
+            <div class="flex justify-end">
+                <a th:href="@{/review}">
+                    <button type="button"
+                        class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Cancel
+                </button>
+                </a>
+                <button type="submit"
+                        class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

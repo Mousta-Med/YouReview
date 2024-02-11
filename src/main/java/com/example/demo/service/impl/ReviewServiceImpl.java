@@ -4,11 +4,15 @@ import com.example.demo.model.request.ReviewReqDto;
 import com.example.demo.model.response.ReviewResDto;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.entity.Review;
+import com.example.demo.repository.PersonRepository;
 import com.example.demo.repository.ReviewRepository;
 import com.example.demo.service.ReviewService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +27,16 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     ReviewRepository reviewRepository;
+
+    @Autowired
+    PersonRepository personRepository;
+
     @Override
     public ReviewResDto save(ReviewReqDto reviewReqDto) {
-        return modelMapper.map(reviewRepository.save(modelMapper.map(reviewReqDto, Review.class)), ReviewResDto.class);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Review review = modelMapper.map(reviewReqDto, Review.class);
+        review.setPerson(personRepository.findByUsername(authentication.getName()).get());
+        return modelMapper.map(reviewRepository.save(review), ReviewResDto.class);
     }
 
     @Override

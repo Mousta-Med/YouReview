@@ -79,7 +79,6 @@ public class SecurityConfig {
 
     private String[] getOpenedResources() {
         return new String[]{
-//                "/**",
                 "/h2-console/**",
                 "/swagger-ui/**",
                 "/swagger-resources",

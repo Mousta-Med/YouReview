@@ -25,9 +25,6 @@ public final class Review extends Auditable{
 
     private String message;
 
-    @OneToMany(mappedBy = "review",fetch = FetchType.LAZY)
-    private List<Reaction> reactions;
-
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Person person;
