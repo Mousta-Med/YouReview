@@ -51,28 +51,28 @@ public class SecurityConfig {
                             .requestMatchers("/reviews/**").hasAuthority("ROLE_ADMIN")
                             .anyRequest().authenticated();
                 })
-                .formLogin((form) -> form
-                        .loginPage("/")
-                        .usernameParameter("username")
-                        .loginProcessingUrl("/login")
-                        .successHandler((request, response, authentication) -> {
-                            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-                            if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
-                                response.sendRedirect("/review");
-                            } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                                response.sendRedirect("/reviews");
-                            } else {
-                                response.sendRedirect("/home");
-                            }
-                        })
-                        .permitAll()
-                )
-                .logout((logout) -> {
-                    logout
-                            .permitAll()
-                            .logoutUrl("/logout")
-                            .logoutSuccessUrl("/");
-                })
+//                .formLogin((form) -> form
+//                        .loginPage("/")
+//                        .usernameParameter("username")
+//                        .loginProcessingUrl("/login")
+//                        .successHandler((request, response, authentication) -> {
+//                            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+//                            if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
+//                                response.sendRedirect("/review");
+//                            } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+//                                response.sendRedirect("/reviews");
+//                            } else {
+//                                response.sendRedirect("/home");
+//                            }
+//                        })
+//                        .permitAll()
+//                )
+//                .logout((logout) -> {
+//                    logout
+//                            .permitAll()
+//                            .logoutUrl("/logout")
+//                            .logoutSuccessUrl("/");
+//                })
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }
