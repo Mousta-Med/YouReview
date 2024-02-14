@@ -72,8 +72,7 @@ public class SecurityConfig {
                             .permitAll()
                             .logoutUrl("/logout")
                             .logoutSuccessUrl("/");
-                })
-                .httpBasic(Customizer.withDefaults());
+                });
         return http.build();
     }
 
